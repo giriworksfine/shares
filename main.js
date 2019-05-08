@@ -104,6 +104,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _currency_pipe__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./currency.pipe */ "./src/app/currency.pipe.ts");
 /* harmony import */ var _countrycode_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./countrycode.pipe */ "./src/app/countrycode.pipe.ts");
 /* harmony import */ var _convert_pipe__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./convert.pipe */ "./src/app/convert.pipe.ts");
+/* harmony import */ var _login_register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./login/register/register.component */ "./src/app/login/register/register.component.ts");
+/* harmony import */ var _login_access_access_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./login/access/access.component */ "./src/app/login/access/access.component.ts");
+/* harmony import */ var _login_forgot_forgot_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./login/forgot/forgot.component */ "./src/app/login/forgot/forgot.component.ts");
+/* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ng2-search-filter */ "./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
+
+
+
+
+
 
 
 
@@ -127,7 +136,11 @@ var appRoutes = [
     { path: 'news', component: _news_news_component__WEBPACK_IMPORTED_MODULE_8__["NewsComponent"] },
     { path: 'stocks', component: _stocks_stocks_component__WEBPACK_IMPORTED_MODULE_9__["StocksComponent"] },
     { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_10__["ContactComponent"] },
-    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"] },
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"], children: [
+            { path: '', component: _login_access_access_component__WEBPACK_IMPORTED_MODULE_18__["AccessComponent"] },
+            { path: 'register', component: _login_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"] },
+            { path: 'forgot', component: _login_forgot_forgot_component__WEBPACK_IMPORTED_MODULE_19__["ForgotComponent"] }
+        ] },
     { path: 'portfolio', component: _portfolio_portfolio_component__WEBPACK_IMPORTED_MODULE_12__["PortfolioComponent"] },
     { path: 'support', component: _support_support_component__WEBPACK_IMPORTED_MODULE_13__["SupportComponent"] },
     { path: 'profile', redirectTo: 'home' },
@@ -140,10 +153,10 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _news_news_component__WEBPACK_IMPORTED_MODULE_8__["NewsComponent"], _stocks_stocks_component__WEBPACK_IMPORTED_MODULE_9__["StocksComponent"], _contact_contact_component__WEBPACK_IMPORTED_MODULE_10__["ContactComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"], _portfolio_portfolio_component__WEBPACK_IMPORTED_MODULE_12__["PortfolioComponent"], _support_support_component__WEBPACK_IMPORTED_MODULE_13__["SupportComponent"], _currency_pipe__WEBPACK_IMPORTED_MODULE_14__["CurrencyPipe"], _countrycode_pipe__WEBPACK_IMPORTED_MODULE_15__["CountrycodePipe"], _convert_pipe__WEBPACK_IMPORTED_MODULE_16__["ConvertPipe"]
+                _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _news_news_component__WEBPACK_IMPORTED_MODULE_8__["NewsComponent"], _stocks_stocks_component__WEBPACK_IMPORTED_MODULE_9__["StocksComponent"], _contact_contact_component__WEBPACK_IMPORTED_MODULE_10__["ContactComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"], _portfolio_portfolio_component__WEBPACK_IMPORTED_MODULE_12__["PortfolioComponent"], _support_support_component__WEBPACK_IMPORTED_MODULE_13__["SupportComponent"], _currency_pipe__WEBPACK_IMPORTED_MODULE_14__["CurrencyPipe"], _countrycode_pipe__WEBPACK_IMPORTED_MODULE_15__["CountrycodePipe"], _convert_pipe__WEBPACK_IMPORTED_MODULE_16__["ConvertPipe"], _login_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"], _login_access_access_component__WEBPACK_IMPORTED_MODULE_18__["AccessComponent"], _login_forgot_forgot_component__WEBPACK_IMPORTED_MODULE_19__["ForgotComponent"]
             ],
             imports: [
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forRoot(appRoutes), _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"]
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], ng2_search_filter__WEBPACK_IMPORTED_MODULE_20__["Ng2SearchPipeModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forRoot(appRoutes), _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
@@ -373,6 +386,7 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.records = [];
         this.http.get("https://api.exchangeratesapi.io/latest?base=" + this.from).subscribe(function (response) { return _this.records.push(response); });
+        console.log(this.records);
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -576,6 +590,9 @@ var HomeComponent = /** @class */ (function () {
         if (this.id) {
             clearInterval(this.id);
         }
+        if (this.k) {
+            clearInterval(this.id);
+        }
     };
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -587,6 +604,155 @@ var HomeComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_news_service__WEBPACK_IMPORTED_MODULE_2__["NewsService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], HomeComponent);
     return HomeComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/login/access/access.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/login/access/access.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2FjY2Vzcy9hY2Nlc3MuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/login/access/access.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/login/access/access.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-4 col-sm-offset-4\">\n    <div class=\"panel panel-info\">\n      <div class=\"panel panel-heading\">\n      <img src=\"./assets/logo.png\" style=\"margin-left:auto;margin-right:auto\"  class=\"img-responsive\" width=\"100px\" height=\"100px\">\n      </div>\n      <div class=\"panel panel-body\">\n        <form [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\n          <div class=\"form-group\">\n            <label for=\"uname\">\n              UserName:\n            </label>\n            <input type=\"text\" formControlName=\"username\" class=\"form-control\" name=\"username\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">\n              Password:\n            </label>\n            <input type=\"password\"  formControlName=\"password\" class=\"form-control\" name=\"password\">\n          </div>\n          <div class=\"form-group\">\n            <button style=\"float: left\" type=\"submit\" class=\"btn btn-info\">Login</button>\n            <button style=\"float: right\" type=\"button\" (click)=\"reset()\" class=\"btn btn-info\">Reset</button>\n          </div>\n          <br>\n          <br>\n          <br>\n          <div class=\"form-group\">\n         <a style=\"float: left\" routerLink=\"forgot\">Forgot Password</a>\n         <a style=\"float: right\" routerLink=\"register\">Click to Register</a>\n          </div>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/login/access/access.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/login/access/access.component.ts ***!
+  \**************************************************/
+/*! exports provided: AccessComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccessComponent", function() { return AccessComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+var AccessComponent = /** @class */ (function () {
+    function AccessComponent() {
+    }
+    AccessComponent.prototype.ngOnInit = function () {
+        this.myForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            username: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+        });
+    };
+    AccessComponent.prototype.onSubmit = function (form) {
+        console.log(form.value);
+    };
+    AccessComponent.prototype.reset = function (form) {
+        this.myForm.reset();
+    };
+    AccessComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-access',
+            template: __webpack_require__(/*! ./access.component.html */ "./src/app/login/access/access.component.html"),
+            styles: [__webpack_require__(/*! ./access.component.css */ "./src/app/login/access/access.component.css")]
+        })
+    ], AccessComponent);
+    return AccessComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/login/forgot/forgot.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/login/forgot/forgot.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2ZvcmdvdC9mb3Jnb3QuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/login/forgot/forgot.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/login/forgot/forgot.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-4 col-sm-offset-4\">\n    <div class=\"panel panel-info\">\n      <div class=\"panel panel-heading\">\n      <img src=\"./assets/logo.png\" style=\"margin-left:auto;margin-right:auto\"  class=\"img-responsive\" width=\"100px\" height=\"100px\">\n      </div>\n      <div class=\"panel panel-body\">\n        <form *ngIf=\"!emailstatus\" [formGroup]=\"myForm\" (ngSubmit)=\"check_email(myForm)\">\n          <div class=\"form-group\">\n            <label for=\"uname\">\n            Registered Email\n            </label>\n            <input type=\"email\" formControlName=\"check_email\" class=\"form-control\" name=\"check_email\">\n          </div>\n      \n          <div class=\"form-group\">\n            <button style=\"float: left\" type=\"submit\" class=\"btn btn-info\">Check</button>\n            <button style=\"float: right\" type=\"button\" (click)=\"reset()\" class=\"btn btn-info\">Reset</button>\n          </div>\n           \n        </form>\n        <form *ngIf=\"emailstatus && !otp\" [formGroup]=\"myForm\" (ngSubmit)=\"check_otp(myForm)\">\n          <div class=\"form-group\">\n            <label for=\"uname\">\n            Enter OTP\n            </label>\n            <input type=\"number\" formControlName=\"check_otp\" class=\"form-control\" name=\"check_otp\">\n          </div>\n          <div class=\"form-group\">\n            <button style=\"float: left\" type=\"submit\" class=\"btn btn-info\">Check</button>\n            <button style=\"float: right\" type=\"button\" (click)=\"reset()\" class=\"btn btn-info\">Reset</button>\n          </div>\n           \n        </form>\n        <form *ngIf=\"otp\" [formGroup]=\"myForm\" (ngSubmit)=\"create_pwd(myForm)\">\n          <div class=\"form-group\">\n            <label for=\"uname\">\n           New Password\n            </label>\n            <input type=\"text\" formControlName=\"check_pwd1\" class=\"form-control\" name=\"check_otp\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"uname\">\n           Retype Password\n            </label>\n            <input type=\"text\" formControlName=\"check_pwd2\" class=\"form-control\" name=\"check_otp\">\n          </div>\n          <div class=\"form-group\">\n            <button style=\"float: left\" type=\"submit\" class=\"btn btn-info\">Confirm</button>\n            <button style=\"float: right\" type=\"button\" (click)=\"reset()\" class=\"btn btn-info\">Reset</button>\n          </div> \n        </form>\n\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/login/forgot/forgot.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/login/forgot/forgot.component.ts ***!
+  \**************************************************/
+/*! exports provided: ForgotComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotComponent", function() { return ForgotComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+var ForgotComponent = /** @class */ (function () {
+    function ForgotComponent() {
+        this.emailstatus = false;
+        this.otp = false;
+        this.useremail = "giri@gmail.com";
+        this.userotp = 1234;
+    }
+    ForgotComponent.prototype.ngOnInit = function () {
+        this.myForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            check_email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            check_otp: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](),
+        });
+    };
+    ForgotComponent.prototype.check_email = function (form) {
+        if (form.value.check_email == this.useremail) {
+            this.emailstatus = !this.emailstatus;
+        }
+    };
+    ForgotComponent.prototype.create_pwd = function (form) {
+        console.log(form.value);
+    };
+    ForgotComponent.prototype.check_otp = function (form) {
+        if (form.value.check_otp == this.userotp) {
+            this.otp = !this.otp;
+        }
+    };
+    ForgotComponent.prototype.reset = function (form) {
+        this.myForm.reset();
+    };
+    ForgotComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-forgot',
+            template: __webpack_require__(/*! ./forgot.component.html */ "./src/app/login/forgot/forgot.component.html"),
+            styles: [__webpack_require__(/*! ./forgot.component.css */ "./src/app/login/forgot/forgot.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], ForgotComponent);
+    return ForgotComponent;
 }());
 
 
@@ -611,7 +777,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  login works!\n</p>\n"
+module.exports = "<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -649,6 +815,62 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/login/register/register.component.css":
+/*!*******************************************************!*\
+  !*** ./src/app/login/register/register.component.css ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/login/register/register.component.html":
+/*!********************************************************!*\
+  !*** ./src/app/login/register/register.component.html ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-4 col-sm-offset-4\">\n    <div class=\"panel panel-info\">\n      <div class=\"panel panel-heading\">\n      <img src=\"./assets/logo.png\" style=\"margin-left:auto;margin-right:auto\"  class=\"img-responsive\" width=\"100px\" height=\"100px\">\n      </div>\n      <div class=\"panel panel-body\">\n        <form [formGroup]=\"myForm\" (ngSubmit)=\"onSubmit(myForm)\">\n          <div class=\"form-group\">\n            <label for=\"uname\">\n              Name:\n            </label>\n            <input type=\"text\" formControlName=\"regname\" class=\"form-control\" name=\"username\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"email\">\n              Email:\n            </label>\n            <input type=\"text\" formControlName=\"regemail\" class=\"form-control\" name=\"username\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"contact\">\n              Contact:\n            </label>\n            <input type=\"text\" formControlName=\"regcontact\" class=\"form-control\" name=\"username\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">\n              Password:\n            </label>\n            <input type=\"password\"  formControlName=\"password\" class=\"form-control\" name=\"password\">\n          </div>\n          <div class=\"form-group\">\n            <button style=\"float: left\" type=\"submit\" class=\"btn btn-info\">Register</button>\n            <button style=\"float: right\" type=\"button\" (click)=\"reset()\" class=\"btn btn-info\">Reset</button>\n          </div>\n          <br>\n          <br>\n          <br>\n        \n        </form>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/login/register/register.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/login/register/register.component.ts ***!
+  \******************************************************/
+/*! exports provided: RegisterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var RegisterComponent = /** @class */ (function () {
+    function RegisterComponent() {
+    }
+    RegisterComponent.prototype.ngOnInit = function () {
+    };
+    RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-register',
+            template: __webpack_require__(/*! ./register.component.html */ "./src/app/login/register/register.component.html"),
+            styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/login/register/register.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], RegisterComponent);
+    return RegisterComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/news.service.ts":
 /*!*********************************!*\
   !*** ./src/app/news.service.ts ***!
@@ -676,9 +898,12 @@ var NewsService = /** @class */ (function () {
         return this.http.get("https://openexchangerates.org/api/latest.json?app_id=db5cbd941dda4a06ac6e1f04701002be");
     };
     NewsService.prototype.showstock = function () {
-        return this.http.get("");
+        return this.http.get("https://api.iextrading.com/1.0/stock/market/batch?symbols=INTC,MSFT,AAPL,LT,INFY,FB,ACN,GOOGL,JPM,UNH, PFE&types=quote&range=1m");
     };
     NewsService.prototype.conversion = function () {
+    };
+    NewsService.prototype.getcodes = function () {
+        return this.http.get("https://api.iextrading.com/1.0/ref-data/symbols");
     };
     NewsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -851,7 +1076,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-sm-12\">\n      \n          <div class=\"panel panel-info\">\n              <div class=\"panel panel-heading\">\n                  \n            <h4><strong>Today Stock Exchange : {{tday  |  date:'medium'}}</strong>&nbsp;&nbsp;<i class=\"fa fa-spinner fa-spin\" style=\"font-size:20px\"></i></h4>\n              </div>\n              <div class=\"panel panel-body\">\n               <form class=\"form-inline\" >\n                 <div class=\"row\">\n                   <div class=\"col-sm-3\">\n                      <div class=\"form-group\">\n                 \n                          <select class=\"form-control\" name=\"stock\">\n                            <option value=\"\">Select Stock Exchange</option>\n                            <option value=\"BSE\">Bombay Stock Exchange(B.S.E)</option>\n                            <option value=\"NSE\">National Stock Exchange(N.S.E)</option>\n                          </select>\n                      </div>\n                   </div>\n                  \n                 </div>\n                \n               </form>\n    \n              </div>\n             \n            </div>\n      </div>\n    </div>\n  </div>\n  "
+module.exports = "<div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-sm-12\">\n      \n          <div class=\"panel panel-info\">\n              <div class=\"panel panel-heading\">\n                  \n            <h4><strong>Today Stock Exchange : {{tday  |  date:'medium'}}</strong>&nbsp;&nbsp;<i class=\"fa fa-spinner fa-spin\" style=\"font-size:20px\"></i></h4>\n              </div>\n              <div class=\"panel panel-body\">\n              <div class=\"row\">\n                <div class=\"col-sm-8\">\n                    \n               \n                    \n                        <select class=\"form-control\"  [(ngModel)]=\"add_company\" (change)=\"getstock(add_company)\">\n                          <option value=\"Select\">Add Company to watch</option>\n                          <option value=\"{{c.symbol}}\" *ngFor=\"let c of stock_codes\" >{{c.name}}-{{c.symbol}}</option>\n                        </select>\n                      \n                </div>\n                <div class=\"col-sm-4\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Search the Company\">\n                </div>\n             \n              </div>\n              <br>\n            \n               <div class=\"row\">\n                 <div class=\"col-sm-12\">\n                    <div class=\"table-responsive\">\n                   <table class=\"table table-bordered\">\n                     <tr>\n                       <th>Sl.no</th>\n                       <th>Company Name</th>\n                       <th>Symbol</th>\n                       <th>Sector</th>\n                       <th>Status</th>\n                       <th>Last Updated</th>\n                       <th>View More</th>\n                     </tr>\n                     <tr *ngFor=\"let s of stocks let i=index\">\n                       <td>{{i}}</td>\n                       <td>{{s.quote.companyName}}</td>\n                       <td>{{s.quote.symbol}}</td>\n                       <td>{{s.quote.sector}}</td>\n                       <td *ngIf=\"(s.quote.latestPrice-s.quote.previousClose)>=0\">{{s.quote.latestPrice}}&nbsp;USD&nbsp;({{s.quote.change}}&nbsp;<i class=\"fa fa-arrow-up\" style=\"font-size:15px;color:green\"></i>)</td>\n                       <td *ngIf=\"(s.quote.latestPrice-s.quote.previousClose)<0\">{{s.quote.latestPrice}}&nbsp;USD&nbsp;({{s.quote.change}}&nbsp;<i class=\"fa fa-arrow-down\" style=\"font-size:15px;color:red\"></i>)</td>\n                       <td>{{s.quote.latestTime}}</td>\n                       <td><button class=\"btn btn-info\" (click)=showmore(s.quote,i)>View More</button></td>\n                       \n                       </tr>\n                       \n                   \n                   </table>\n                   \n                   </div>\n \n               </div>\n              \n    \n              </div>\n             \n            </div>\n      </div>\n    </div>\n  </div>\n  "
 
 /***/ }),
 
@@ -875,22 +1100,46 @@ var StocksComponent = /** @class */ (function () {
     function StocksComponent(stock) {
         this.stock = stock;
         this.stocks = [];
+        this.stock_codes = [];
+        this.viewmore = [];
     }
     StocksComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.getdate();
+        this.getstock();
         this.k = setInterval(function () {
             _this.getdate();
         }, 1000);
-        this.getstock();
+        this.j = setInterval(function () {
+            _this.getstock();
+        }, 1000);
+        this.getstock_code();
     };
     StocksComponent.prototype.getstock = function () {
         var _this = this;
-        this.stock.showstock().subscribe(function (data) { return _this.stocks.push(data); });
-        console.log(this.stocks);
+        this.stock.showstock().subscribe(function (data) { return _this.stocks = Object.values(data); });
+    };
+    StocksComponent.prototype.getstock_code = function () {
+        var _this = this;
+        this.stock.getcodes().subscribe(function (data) { return _this.stock_codes = Object.values(data); });
     };
     StocksComponent.prototype.getdate = function () {
         this.tday = new Date();
+    };
+    StocksComponent.prototype.showmore = function (symbol, ind) {
+        var result = Object.keys(symbol).map(function (key) {
+            return { "name": String(key), "value": symbol[key] };
+        });
+        this.viewmore = result;
+        console.log(this.viewmore);
+    };
+    StocksComponent.prototype.ngOnDestroy = function () {
+        if (this.j) {
+            clearInterval(this.j);
+        }
+        if (this.k) {
+            clearInterval(this.k);
+        }
     };
     StocksComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
